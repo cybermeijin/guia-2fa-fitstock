@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guia: Ativar 2FA no Google Workspace - Fitstock</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #2c5f7d 0%, #1a3d52 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2c5f7d 0%, #4a9bc5 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-container {
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .logo {
+            max-width: 280px;
+            height: auto;
+            padding: 15px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .security-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 10px 20px;
+            border-radius: 25px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .deadline-banner {
+            background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.15em;
+            border-bottom: 4px solid #d68910;
+        }
+
+        .deadline-banner .icon {
+            font-size: 1.4em;
+            margin-right: 10px;
+        }
+
+        .intro {
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-bottom: 3px solid #2c5f7d;
+        }
+
+        .intro h2 {
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .intro ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .intro li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            color: #555;
+        }
+
+        .intro li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #4a9bc5;
+            font-weight: bold;
+            font-size: 1.3em;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .step {
+            margin-bottom: 40px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            border-left: 5px solid #2c5f7d;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .step:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .step-number {
+            display: inline-block;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #2c5f7d, #4a9bc5);
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 45px;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 15px;
+            box-shadow: 0 4px 10px rgba(44, 95, 125, 0.3);
+        }
+
+        .step-title {
+            font-size: 1.5em;
+            color: #333;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .step-description {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            font-size: 1.05em;
+        }
+
+        .step-details {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            border-left: 3px solid #f39c12;
+        }
+
+        .step-details strong {
+            color: #d93025;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 20px;
+            margin: 30px 0;
+            border-radius: 8px;
+        }
+
+        .warning-box h3 {
+            color: #856404;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .warning-box p {
+            color: #856404;
+            line-height: 1.6;
+        }
+
+        .tip-box {
+            background: #d1ecf1;
+            border-left: 4px solid #4a9bc5;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+
+        .tip-box h3 {
+            color: #0c5460;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tip-box p {
+            color: #0c5460;
+            line-height: 1.6;
+        }
+
+        .success-box {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .success-box h3 {
+            color: #155724;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .success-box p {
+            color: #155724;
+            line-height: 1.6;
+        }
+
+        .icon {
+            font-size: 1.5em;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #2c5f7d 0%, #1a3d52 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+
+        .footer a {
+            color: #4a9bc5;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .footer a:hover {
+            color: #6bbde5;
+            text-decoration: underline;
+        }
+
+        .footer-logo {
+            max-width: 180px;
+            height: auto;
+            margin: 15px auto;
+            opacity: 0.8;
+        }
+
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .step:hover {
+                transform: none;
+            }
+            .deadline-banner {
+                print-color-adjust: exact;
+                -webkit-print-color-adjust: exact;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.6em;
+            }
+            .logo {
+                max-width: 200px;
+            }
+            .content {
+                padding: 20px;
+            }
+            .step {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <img src="logo.png" alt="Fitstock Logo" class="logo">
+            </div>
+            <h1>🔐 Guia de Ativação do 2FA</h1>
+            <p>Google Workspace - Autenticação de Dois Fatores</p>
+            <div class="security-badge">🛡️ Segurança Corporativa Fitstock</div>
+        </div>
+
+        <div class="deadline-banner">
+            <span class="icon">⏰</span>
+            PRAZO PARA ATIVAÇÃO: 10 de Outubro de 2025
+        </div>
+
+        <div class="intro">
+            <h2><span class="icon">📋</span> Por que ativar o 2FA?</h2>
+            <ul>
+                <li>Protege sua conta mesmo se sua senha for comprometida</li>
+                <li>Reduz em 99,9% as chances de invasão da conta</li>
+                <li>Protege dados sensíveis da Fitstock e de nossos clientes</li>
+                <li>Cumpre requisitos de segurança corporativa</li>
+                <li>Garante a integridade das operações e transações da empresa</li>
+            </ul>
+        </div>
+
+        <div class="content">
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">1</span>
+                    Acesse sua Conta Google
+                </h2>
+                <p class="step-description">
+                    Abra seu navegador e acesse <strong>myaccount.google.com</strong> ou clique no ícone do seu perfil em qualquer serviço Google e selecione "Gerenciar sua Conta do Google".
+                </p>
+                <div class="step-details">
+                    <strong>⚠️ Importante:</strong> Certifique-se de estar logado com sua conta corporativa Fitstock (@fitstock.com.br), não com uma conta pessoal do Gmail.
+                </div>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">2</span>
+                    Entre em Segurança
+                </h2>
+                <p class="step-description">
+                    No menu lateral esquerdo, clique em <strong>"Segurança"</strong>. Esta seção contém todas as configurações de proteção da sua conta.
+                </p>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">3</span>
+                    Encontre a Verificação em Duas Etapas
+                </h2>
+                <p class="step-description">
+                    Role a página até encontrar a seção <strong>"Como fazer login no Google"</strong>. Clique em <strong>"Verificação em duas etapas"</strong>.
+                </p>
+                <div class="step-details">
+                    Se você ver "Verificação em duas etapas: ativada", significa que o 2FA já está configurado na sua conta. Neste caso, apenas confirme se há métodos de backup configurados.
+                </div>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">4</span>
+                    Comece a Configuração
+                </h2>
+                <p class="step-description">
+                    Clique no botão azul <strong>"Começar"</strong> ou <strong>"Ativar"</strong>. O Google pode solicitar que você insira sua senha novamente para confirmar sua identidade.
+                </p>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">5</span>
+                    Adicione seu Número de Telefone
+                </h2>
+                <p class="step-description">
+                    Digite seu número de telefone celular (com DDD). Este será o primeiro método de verificação.
+                </p>
+                <div class="step-details">
+                    <strong>Escolha o método de recebimento:</strong>
+                    <br>• <strong>Mensagem de texto (SMS)</strong> - Recomendado
+                    <br>• <strong>Chamada telefônica</strong> - Alternativa caso SMS não funcione
+                    <br><br>
+                    <strong>💡 Dica:</strong> Use um número de celular pessoal que você sempre tenha acesso, não um número corporativo que possa ser transferido.
+                </div>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">6</span>
+                    Confirme o Código de Verificação
+                </h2>
+                <p class="step-description">
+                    Você receberá um código de 6 dígitos via SMS ou chamada. Digite este código na tela do Google para confirmar que você tem acesso ao telefone cadastrado.
+                </p>
+            </div>
+
+            <div class="step">
+                <h2 class="step-title">
+                    <span class="step-number">7</span>
+                    Ative a Verificação em Duas Etapas
+                </h2>
+                <p class="step-description">
+                    Após confirmar o código, clique em <strong>"Ativar"</strong> para finalizar a configuração básica do 2FA. Sua conta Fitstock agora está mais protegida!
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <h3><span class="icon">⚠️</span> CRÍTICO - Códigos de Backup</h3>
+                <p>
+                    Após ativar o 2FA, o Google oferecerá <strong>códigos de backup</strong> para usar caso você perca acesso ao seu telefone. 
+                    <strong>ANOTE ESTES CÓDIGOS IMEDIATAMENTE</strong> e guarde em local seguro (não no celular). Cada código pode ser usado apenas uma vez.
+                    <br><br>
+                    <strong>Sugestão:</strong> Imprima os códigos e guarde em local físico seguro, ou salve em um gerenciador de senhas.
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3><span class="icon">💡</span> Recomendação Fitstock: Use um Aplicativo Autenticador</h3>
+                <p>
+                    Para maior segurança e praticidade, adicione também um aplicativo autenticador como método adicional:
+                    <br><br>
+                    <strong>Aplicativos recomendados:</strong>
+                    <br>• <strong>Google Authenticator</strong> (gratuito) - Recomendado pela Fitstock
+                    <br>• Microsoft Authenticator (gratuito)
+                    <br>• Authy (gratuito)
+                    <br><br>
+                    <strong>Como configurar:</strong>
+                    <br>1. Baixe o aplicativo no seu celular
+                    <br>2. Vá em <strong>Segurança → Verificação em duas etapas → Aplicativo Authenticator</strong>
+                    <br>3. Escaneie o QR Code apresentado na tela
+                    <br>4. Digite o código de 6 dígitos gerado pelo app para confirmar
+                </p>
+            </div>
+
+            <div class="success-box">
+                <h3>✅ Parabéns! Sua conta Fitstock está protegida</h3>
+                <p>
+                    A partir de agora, sempre que você fizer login em um novo dispositivo ou navegador, 
+                    será necessário inserir o código de verificação além da sua senha.
+                    <br><br>
+                    <strong>Isso mantém seus dados, os dados da Fitstock e as informações dos nossos clientes muito mais seguros!</strong>
+                </p>
+            </div>
+
+            <div class="tip-box">
+                <h3><span class="icon">🔧</span> Próximos Passos Recomendados</h3>
+                <p>
+                    <strong>1.</strong> Configure métodos de backup adicionais (outro telefone, aplicativo autenticador)
+                    <br><strong>2.</strong> Salve os códigos de backup em local seguro (OBRIGATÓRIO)
+                    <br><strong>3.</strong> Revise os dispositivos confiáveis em "Seus dispositivos"
+                    <br><strong>4.</strong> Configure notificações de segurança no seu e-mail de recuperação
+                    <br><strong>5.</strong> Teste o login em um navegador anônimo para confirmar que tudo funciona
+                </p>
+            </div>
+
+            <div class="warning-box">
+                <h3><span class="icon">📅</span> Lembrete Importante - Prazo</h3>
+                <p>
+                    Todos os colaboradores da Fitstock devem ter o 2FA ativado até <strong>10 de outubro de 2025</strong>.
+                    <br><br>
+                    Após essa data, contas sem 2FA ativado podem ter o acesso limitado por questões de segurança corporativa.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <svg class="footer-logo" viewBox="0 0 300 80" xmlns="http://www.w3.org/2000/svg">
+                <text x="150" y="50" font-family="Arial, sans-serif" font-size="48" font-weight="bold" fill="white" text-anchor="middle">FitStock</text>
+            </svg>
+            <p><strong>Precisa de ajuda com a configuração?</strong></p>
+            <p>Entre em contato com o time de TI: <a href="mailto:ti@fitstock.com.br">ti@fitstock.com.br</a></p>
+            <p style="margin-top: 20px; font-size: 0.9em;">📄 Guia elaborado pelo Departamento de TI da Fitstock</p>
+            <p style="font-size: 0.85em; opacity: 0.8;">Segurança da informação é responsabilidade de todos</p>
+        </div>
+    </div>
+</body>
+</html>
